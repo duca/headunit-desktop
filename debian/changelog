@@ -1,0 +1,337 @@
+headunit-desktop (0.1-42) unstable; urgency=medium
+
+  * Bring debian package up-to-date with latest commit
+    (9aeb00c82ffdb8da93ad5c52a589968344f848a9)
+  * [AA] Include the optional building of the Qt plugin from gst-plugins-
+    good
+
+ -- Gino <gino@gino-ubuntu>  Sun, 21 Feb 2021 07:52:56 +0000
+
+headunit-desktop (0.1-41) unstable; urgency=medium
+
+  * Bring debian package up-to-date with latest commit
+    (b8803fc2edd0d439d9f5143d3015cfff6706a65c)
+  * Fix wrong plugin message signal signatures
+
+ -- Gino <gino@gino-ubuntu>  Sun, 21 Feb 2021 02:38:44 +0000
+
+headunit-desktop (0.1-40) unstable; urgency=medium
+
+  * Bring debian package up-to-date with latest commit
+    (c1af74f76537e6d4fd2a9ae1c5b7e89707e7eced)
+  * [RPI] Fix brightness setting
+
+ -- Gino <gino@gino-ubuntu>  Sun, 21 Feb 2021 01:47:26 +0000
+
+headunit-desktop (0.1-39) unstable; urgency=medium
+
+  * Bring debian package up-to-date with latest commit
+    (24dd5060bff04e05cd50ae1ed8c3e5413304e363)
+  * Fix QML module versions
+
+ -- Gino <gino@gino-ubuntu>  Sat, 20 Feb 2021 21:31:57 +0000
+
+headunit-desktop (0.1-38) unstable; urgency=medium
+
+  * Bring debian package up-to-date with latest commit
+    (4bd2037360ecd04e7493477b9e86778bf9e3b7fd)
+  * Add missing hvac_common header
+
+ -- Gino <gino@gino-ubuntu>  Sat, 20 Feb 2021 21:29:37 +0000
+
+headunit-desktop (0.1-37) unstable; urgency=medium
+
+  * Bring debian package up-to-date with latest commit
+    (f2ded5eea2563fbb9c4987e57fafcc0c35294689)
+  * Fix QML module versions
+
+ -- Gino <gino@gino-ubuntu>  Sat, 20 Feb 2021 20:55:09 +0000
+
+headunit-desktop (0.1-36) unstable; urgency=medium
+
+  * Bring debian package up-to-date with latest commit
+    (351e500e6dec5582389b631b6ca267ac5338e5ed)
+  * Update .pro file
+
+ -- Gino <gino@gino-ubuntu>  Sat, 20 Feb 2021 20:28:14 +0000
+
+headunit-desktop (0.1-35) unstable; urgency=medium
+
+  * Bring debian package up-to-date with latest commit
+    (359d6011d6a46bcd1d967367e270a026681c1f8b)
+  * Update default-theme
+
+ -- Gino <gino@gino-ubuntu>  Sat, 20 Feb 2021 04:29:37 +0000
+
+headunit-desktop (0.1-34) unstable; urgency=medium
+
+  * Bring debian package up-to-date with latest commit
+    (7abbecd0cdb661d474d96bc1f95a5c836697758b)
+  * [ODB] Remove odb-car module
+
+ -- Gino <gino@gino-ubuntu>  Sat, 20 Feb 2021 04:27:47 +0000
+
+headunit-desktop (0.1-33) unstable; urgency=medium
+
+  * Bring debian package up-to-date with latest commit
+    (d7461f82a67750523d86a3c3e27637ab6afb85a4)
+  * [HVAC] Add new HVAC UI & backend
+
+ -- Gino <gino@gino-ubuntu>  Sat, 20 Feb 2021 04:27:15 +0000
+
+headunit-desktop (0.1-32) unstable; urgency=medium
+
+  * Bring debian package up-to-date with latest commit
+    (d979297d9ebe9ce78e38b0023c2ccc36f3b4acbc)
+  * [FMRadio] Add FM Radio module
+
+ -- Gino <gino@gino-ubuntu>  Sat, 20 Feb 2021 04:26:38 +0000
+
+headunit-desktop (0.1-31) unstable; urgency=medium
+
+  * Bring debian package up-to-date with latest commit
+    (8ef914659aa74a2cf6a0637e4d97736c1695d773)
+  * [HUDSerial] Add HUDSerial module
+
+ -- Gino <gino@gino-ubuntu>  Sat, 20 Feb 2021 04:26:25 +0000
+
+headunit-desktop (0.1-30) unstable; urgency=medium
+
+  * Bring debian package up-to-date with latest commit
+    (02fa95e2704e577a84ad4b5b5880773ed3249556)
+  * Update modules according to new plugin interface
+
+ -- Gino <gino@gino-ubuntu>  Sat, 20 Feb 2021 04:25:58 +0000
+
+headunit-desktop (0.1-29) unstable; urgency=medium
+
+  * Bring debian package up-to-date with latest commit
+    (0693d0fe0e17b70c025bf10c39f55eb7b47d8dca)
+  * [App] Update theme & plugin managers
+
+ -- Gino <gino@gino-ubuntu>  Sat, 20 Feb 2021 04:22:55 +0000
+
+headunit-desktop (0.1-28) unstable; urgency=medium
+
+  * Bring debian package up-to-date with latest commit
+    (ae6d852a825dc6f4e3c75a596ae3c5fb048ab3b2)
+  * [ThemeManager] Change size settings to tumbler
+
+ -- Gino <gino@gino-ubuntu>  Sat, 20 Feb 2021 04:20:30 +0000
+
+headunit-desktop (0.1-27) unstable; urgency=medium
+
+  * Bring debian package up-to-date with latest commit
+    (ed9c60f5a9b57c0ac730d2d77df714facbebd527)
+  * [App] Add hvac-common header
+
+ -- Gino <gino@gino-ubuntu>  Sat, 20 Feb 2021 04:19:07 +0000
+
+headunit-desktop (0.1-26) unstable; urgency=medium
+
+  * Bring debian package up-to-date with latest commit
+    (0846d4977550568f1fbd1234b0e020b8b608c5fc)
+  * [App] Add hvac-common header
+
+ -- Gino <gino@gino-ubuntu>  Sat, 20 Feb 2021 04:18:16 +0000
+
+headunit-desktop (0.1-25) unstable; urgency=medium
+
+  * Bring debian package up-to-date with latest commit
+    (77348b0b74ec25ed15effb26fe7e8674ca2a71d8)
+  * [HVAC] Move AC functions to separate module and add configuration
+    engine
+
+ -- Gino <gino@gino-ubuntu>  Sat, 17 Oct 2020 05:50:44 +0000
+
+headunit-desktop (0.1-24) unstable; urgency=medium
+
+  * Bring debian package up-to-date with latest commit
+    (2910a64b8100c981d5cf35c6c5ca39a807c9dda3)
+  * Update submodules to latest
+
+ -- Gino <gino@gino-ubuntu>  Sat, 17 Oct 2020 05:40:41 +0000
+
+headunit-desktop (0.1-23) unstable; urgency=medium
+
+  * Bring debian package up-to-date with latest commit
+    (6c4baaf828ec2136300cb9f8b43a676fd5bc94c9)
+  * [Theme] Update default theme
+
+ -- Gino <gino@gino-ubuntu>  Fri, 16 Oct 2020 14:49:04 +0000
+
+headunit-desktop (0.1-22) unstable; urgency=medium
+
+  * Bring debian package up-to-date with latest commit
+    (e208d07110750d90413d9836918362e66cd02eb7)
+  * [MediaPlayer] Various bug fixes & new features
+
+ -- Gino <gino@gino-ubuntu>  Fri, 16 Oct 2020 02:51:38 +0000
+
+headunit-desktop (0.1-21) unstable; urgency=medium
+
+  * Bring debian package up-to-date with latest commit
+    (88ff426988759e274cae9828f49226f24af40095)
+  * [AndroidAuto] Add status messages to front end
+
+ -- Gino <gino@gino-ubuntu>  Thu, 15 Oct 2020 13:53:46 +0000
+
+headunit-desktop (0.1-20) unstable; urgency=medium
+
+  * Bring debian package up-to-date with latest commit
+    (f80780aa6e5ba8c1a24b136e028692c131dab450)
+  * [AndroidAuto] Clean up
+
+ -- Gino <gino@gino-ubuntu>  Thu, 15 Oct 2020 03:46:11 +0000
+
+headunit-desktop (0.1-19) unstable; urgency=medium
+
+  * Bring debian package up-to-date with latest commit
+    (fba49ffd6e094703fd61facf0dc64b6658be6da2)
+  * [AndroidAuto] Adjustments to audio/video pipelines
+
+ -- Gino <gino@gino-ubuntu>  Thu, 15 Oct 2020 02:04:10 +0000
+
+headunit-desktop (0.1-18) unstable; urgency=medium
+
+  * Bring debian package up-to-date with latest commit
+    (d5ff490d05be1204097f26549ca863f048ad0d5e)
+  * [Debian] Update Debian version to Buster
+
+ -- Gino <gino@gino-ubuntu>  Thu, 15 Oct 2020 00:10:16 +0000
+
+headunit-desktop (0.1-17) unstable; urgency=medium
+
+  * Bring debian package up-to-date with latest commit
+    (9b13e732edc366e21c2934a7e3b5b2ccb5dc0666)
+  * [USBConnectionListener] Fix notifications
+
+ -- Gino <gino@gino-ubuntu>  Thu, 15 Oct 2020 00:09:44 +0000
+
+headunit-desktop (0.1-16) unstable; urgency=medium
+
+  * Bring debian package up-to-date with latest commit
+    (7a807d0725c4c232e120be83e23af8dd8e5a4904)
+  * [SettingsLoader] Change combobox setting type to QString
+
+ -- Gino <gino@gino-ubuntu>  Wed, 14 Oct 2020 23:42:19 +0000
+
+headunit-desktop (0.1-15) unstable; urgency=medium
+
+  * Bring debian package up-to-date with latest commit
+    (4f9e860c74ea471ebba3aaa65f698af97a266356)
+  * [AndroidAuto] Fix pulsesrc mic input
+
+ -- Gino <gino@gino-ubuntu>  Wed, 14 Oct 2020 23:41:17 +0000
+
+headunit-desktop (0.1-14) unstable; urgency=medium
+
+  * Bring debian package up-to-date with latest commit
+    (8c912666cf1694413467f37703160001594d719a)
+  * Update default theme
+
+ -- Gino <gino@gino-ubuntu>  Wed, 14 Oct 2020 01:35:01 +0000
+
+headunit-desktop (0.1-13) unstable; urgency=medium
+
+  * Bring debian package up-to-date with latest commit
+    (7ec93015bbd58a663311ee0d360c08c813b24baf)
+  * Update submodules
+
+ -- Gino <gino@gino-ubuntu>  Tue, 13 Oct 2020 21:20:58 +0000
+
+headunit-desktop (0.1-12) unstable; urgency=medium
+
+  * Bring debian package up-to-date with latest commit
+    (dd8285c1fc8af6a3f98b0b455b190e7f3962cdd4)
+  * [AndroidAuto] Remove Qt5GStreamer dependency
+
+ -- Gino <gino@gino-ubuntu>  Tue, 13 Oct 2020 15:49:52 +0000
+
+headunit-desktop (0.1-11) unstable; urgency=medium
+
+  * Bring debian package up-to-date with latest commit
+    (059562d5cd8cb6e5c46d2a68175c04896940bb02)
+  * [Travis] test
+
+ -- Gino <gino@gino-ubuntu>  Thu, 23 Apr 2020 10:36:34 +0000
+
+headunit-desktop (0.1-10) unstable; urgency=medium
+
+  * Bring debian package up-to-date with latest commit
+    (11485d45baebc218e8718f99a5406d0a23529bbd)
+  * [Travis] Remove qemu packages
+
+ -- Gino <gino@gino-ubuntu>  Tue, 21 Apr 2020 15:44:07 +0000
+
+headunit-desktop (0.1-9) unstable; urgency=medium
+
+  * Bring debian package up-to-date with latest commit
+    (fb40b89dcd8dd0137d8351f09b6a28ae2f0bbe92)
+  * [Travis] Add QEMU build
+
+ -- Gino <gino@gino-ubuntu>  Tue, 21 Apr 2020 15:30:10 +0000
+
+headunit-desktop (0.1-8) unstable; urgency=medium
+
+  * Bring debian package up-to-date with latest commit
+    (f0f860d3a8d065bb6891126c62354f0e35c3ad2e)
+  * [Travis] Add directory list after rpi rootfs install
+
+ -- Gino <gino@gino-ubuntu>  Tue, 14 Apr 2020 18:20:29 +0000
+
+headunit-desktop (0.1-7) unstable; urgency=medium
+
+  * Bring debian package up-to-date with latest commit
+    (2d8c433e05d5dc6dcaafe81bb6bb80a7249369b0)
+  * [Travis] Add qemu and qemu-user-static packages
+
+ -- Gino <gino@gino-ubuntu>  Tue, 14 Apr 2020 18:13:39 +0000
+
+headunit-desktop (0.1-6) unstable; urgency=medium
+
+  * Bring debian package up-to-date with latest commit
+    (6d9a74ce5a01dd93c392f793c8a1a834a908f1c9)
+  * [Travis] Add chroot test line
+
+ -- Gino <gino@gino-ubuntu>  Tue, 14 Apr 2020 18:09:02 +0000
+
+headunit-desktop (0.1-5) unstable; urgency=medium
+
+  * Bring debian package up-to-date with latest commit
+    (1e587a804239e2b30143c384393779fc8797e147)
+  * [Travis] Correct destination when rsyncing rpi rootfs
+
+ -- Gino <gino@gino-ubuntu>  Tue, 14 Apr 2020 17:54:04 +0000
+
+headunit-desktop (0.1-4) unstable; urgency=medium
+
+  * Bring debian package up-to-date with latest commit
+    (dd0478362f83d71d13d3a355ae762ec5765d1912)
+  * [Travis] Correct wrong variable name passed at loop device teardown
+
+ -- Gino <gino@gino-ubuntu>  Tue, 14 Apr 2020 17:43:23 +0000
+
+headunit-desktop (0.1-3) unstable; urgency=medium
+
+  * Bring debian package up-to-date with latest commit
+    (67ca345c3c32da36d5ab2a4b9fb6e9dd3efe2fa3)
+  * [Travis] Update travis to build deb packages for Raspberry Pi and
+    add bintray deployment
+
+ -- Gino <gino@gino-ubuntu>  Tue, 14 Apr 2020 17:36:30 +0000
+
+headunit-desktop (0.1-2) unstable; urgency=medium
+
+  * Bring debian package up-to-date with latest commit
+    (787b2192800004988717c68e59e12398ad6b5bb9)
+  * Add git hooks used for adding git commit messages to
+    debian/changelog
+
+ -- Gino <gino@gino-ubuntu>  Tue, 14 Apr 2020 00:53:10 +0000
+
+headunit-desktop (0.1-1) unstable; urgency=medium
+
+  * Initial release
+
+ -- Viktor Verebelyi <me@viktorgino.me>  Thu, 8 Aug 2019 22:10:00 +0100

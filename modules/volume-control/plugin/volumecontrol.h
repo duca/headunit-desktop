@@ -12,10 +12,16 @@ class VolumeControl : public QObject, PluginInterface
 public:
     explicit VolumeControl(QObject *parent = nullptr);
     QObject *getContextProperty() override;
+    QQuickImageProvider *getImageProvider() override;
+    QStringList eventListeners() override;
+    QStringList events() override;
+    QStringList actions() override;
 
 signals:
 
 public slots:
+    void eventMessage(QString id, QString message) override;
+    void actionMessage(QString id, QString message) override;
 };
 
 #endif // VOLUMECONTROL_H

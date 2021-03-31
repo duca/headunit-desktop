@@ -13,12 +13,10 @@ class PhoneBluetooth : public QObject, PluginInterface
 public:
     explicit PhoneBluetooth(QObject *parent = nullptr);
     QObject *getContextProperty() override;
+    void init() override;
+
 private:
-     TelephonyManager *telephonyManager;
-
-signals:
-
-public slots:
+    TelephonyManager *telephonyManager;
 };
 
 #endif // PHONEBLUETOOTH_H

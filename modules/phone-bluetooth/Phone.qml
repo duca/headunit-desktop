@@ -18,7 +18,7 @@ Item {
         anchors.left: parent.left
         anchors.leftMargin: 8
 
-        RowLayout {
+        Item {
             anchors.fill: parent
             ToolButton {
                 Image {
@@ -119,6 +119,7 @@ Item {
                     }
                 }
             }
+
             Text {
                 id: text1
                 text: netreg.name?netreg.name:"No Connection"
@@ -126,6 +127,7 @@ Item {
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pixelSize: 22
             }
+
 
             Text {
                 id: text4
@@ -281,7 +283,8 @@ Item {
         }
     }
     Connections{
-        target: headunit
+        target: AndroidAuto
+        ignoreUnknownSignals: true
         onBtConnectionRequest:{
             for(var i = 0 ; i < bluezManager.devices.length; i++){
                 if(bluezManager.devices[i].address === address){
@@ -302,7 +305,7 @@ Item {
     OfonoManager {
         id: manager
         onAvailableChanged: {
-            if(available){
+            if(available && manager.modems[0]){
                 ofonomodem.modemPath = manager.modems[0]
             } else {
                 console.log("[ofono] ofono manager is not available");
