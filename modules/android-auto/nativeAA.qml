@@ -1,6 +1,7 @@
 import QtQuick 2.0
-import org.freedesktop.gstreamer.GLVideoItem 1.0
 import Qt.labs.settings 1.0
+import QtMultimedia 5.11
+import QtQml 2.11
 
 Item{
     id:__root
@@ -32,15 +33,14 @@ Item{
         }
     }
 
-    GstGLVideoItem {
+    VideoOutput {
         id: aaVideo
-        objectName: "aaVideoItem"
         visible: AndroidAuto.status === 2 /*AndroidAuto.RUNNING*/
         anchors.verticalCenter: parent.verticalCenter
         anchors.horizontalCenter: parent.horizontalCenter
-        width:parent.width * AndroidAuto.videoHeight/AndroidAuto.videoWidth < parent.height ? parent.width : height * AndroidAuto.videoWidth/AndroidAuto.videoHeight
-        height:parent.width * AndroidAuto.videoHeight/AndroidAuto.videoWidth < parent.height ? width * AndroidAuto.videoHeight/AndroidAuto.videoWidth : parent.height
-
+        width:parent.width * AndroidAuto.videoHeight/AndroidAuto.videoWidth < parent.height ? parent.width : parent.height * AndroidAuto.videoWidth/AndroidAuto.videoHeight
+        height:parent.width * AndroidAuto.videoHeight/AndroidAuto.videoWidth < parent.height ? parent.width * AndroidAuto.videoHeight/AndroidAuto.videoWidth : parent.height
+        source: AndroidAuto
         MouseArea {
             id: mouseArea1
             anchors.fill: parent
@@ -73,7 +73,6 @@ Item{
         Component.onCompleted:{
             AndroidAuto.outputHeight = aaVideo.height
             AndroidAuto.outputWidth = aaVideo.width
-            AndroidAuto.setVideoItem(aaVideo)
         }
 
     }

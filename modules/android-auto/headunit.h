@@ -13,6 +13,11 @@
 #include <gst/app/gstappsrc.h>
 #include <gst/app/gstappsink.h>
 
+#include <QAbstractVideoSurface>
+#include <QVideoSurfaceFormat>
+#include <QAbstractVideoBuffer>
+
+#include "qgstvideobuffer.h"
 
 #include "hu_uti.h"
 #include "hu_aap.h"
@@ -50,6 +55,7 @@ class Headunit : public QObject
     Q_PROPERTY(int videoWidth READ videoWidth NOTIFY videoResized)
     Q_PROPERTY(int videoHeight READ videoHeight NOTIFY videoResized)
     Q_PROPERTY(hu_status status READ status NOTIFY statusChanged)
+    Q_PROPERTY(QAbstractVideoSurface *videoSurface READ videoSurface WRITE setVideoSurface)
 
 public:
     Headunit(QObject *parent = nullptr);
@@ -72,10 +78,16 @@ public:
     int videoHeight();
     hu_status status();
 
+    QAbstractVideoSurface* videoSurface() const { return m_surface; }
+    void setVideoSurface(QAbstractVideoSurface *surface);
+
     GstElement *mic_pipeline = nullptr;
     GstElement *aud_pipeline = nullptr;
     GstElement *au1_pipeline = nullptr;
     GstElement *vid_pipeline = nullptr;
+    GstAppSrc * m_vid_src = nullptr;
+    GstAppSrc * m_aud_src = nullptr;
+    GstAppSrc * m_au1_src = nullptr;
 
     IHUAnyThreadInterface* g_hu = nullptr;
 signals:
@@ -83,15 +95,17 @@ signals:
     void videoResized();
     void deviceConnected(QVariantMap notification);
     void btConnectionRequest(QString address);
-    void videoSurfaceChanged();
     void statusChanged();
+
+    void receivedVideoFrame(const QVideoFrame &frame);
 
 public slots:
     bool mouseDown(QPoint point);
     bool mouseMove(QPoint point);
     bool mouseUp(QPoint point);
     bool keyEvent(QString key);
-    void setVideoItem(QQuickItem *videoItem);
+
+    void videoFrameHandler(const QVideoFrame &frame);
 
 private:
     HUServer *headunit;
@@ -107,5 +121,10 @@ private:
     static gboolean bus_callback(GstBus *bus, GstMessage *message, gpointer *ptr);
     void touchEvent(HU::TouchInfo::TOUCH_ACTION action, QPoint *point);
     static uint64_t get_cur_timestamp();
+    static GstFlowReturn newVideoSample (GstElement * appsink, Headunit * _this);
+
+    QAbstractVideoSurface *m_surface = nullptr;
+    QVideoSurfaceFormat m_format;
+    bool m_videoStarted = false;
 };
 #endif // HEADUNITPLAYER_H

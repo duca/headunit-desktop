@@ -17,6 +17,7 @@
 Headunit::Headunit(QObject *parent) : QObject(parent),
     callbacks(this)
 {
+    connect(this, &Headunit::receivedVideoFrame, this, &Headunit::videoFrameHandler);
 }
 
 Headunit::~Headunit() {
@@ -26,6 +27,11 @@ Headunit::~Headunit() {
     gst_object_unref(mic_pipeline);
     gst_object_unref(aud_pipeline);
     gst_object_unref(au1_pipeline);
+
+
+    gst_object_unref(m_vid_src);
+    gst_object_unref(m_aud_src);
+    gst_object_unref(m_au1_src);
 
     if(headunit){
         delete(headunit);
@@ -80,24 +86,8 @@ int Headunit::startHU(){
     return 1;
 }
 
-
-void Headunit::setVideoItem(QQuickItem * videoItem){
-    GstElement *glsinkbin = gst_bin_get_by_name(GST_BIN(vid_pipeline), "vid_glsinkbin");
-    GstElement *vid_sink;
-
-    g_object_get (glsinkbin, "sink", &vid_sink, nullptr);
-
-    g_object_set (vid_sink, "widget", videoItem, NULL);
-
-    gst_object_unref(vid_sink);
-    gst_object_unref(glsinkbin);
-
-    startHU();
-}
-
 int Headunit::init(){
     GstBus *bus;
-
     GError *error = NULL;    
 
 
@@ -112,20 +102,19 @@ int Headunit::init(){
         #else
                                  "avdec_h264 ! "
         #endif
-                                 "glsinkbin sync=true name=vid_glsinkbin ";
+                "appsink emit-signals=true sync=false name=vid_sink";
+
     vid_pipeline = gst_parse_launch(vid_launch_str, &error);
 
     bus = gst_pipeline_get_bus(GST_PIPELINE(vid_pipeline));
     gst_bus_add_watch(bus, (GstBusFunc) Headunit::bus_callback, this);
     gst_object_unref(bus);
 
-    GstElement *vid_sink = gst_element_factory_make ("qmlglsink", "vid_qmlsink");
+    GstElement *vid_sink = gst_bin_get_by_name(GST_BIN(vid_pipeline), "vid_sink");
 
-    GstElement *glsinkbin = gst_bin_get_by_name(GST_BIN(vid_pipeline), "vid_glsinkbin");
-    g_object_set (glsinkbin, "sink", vid_sink, NULL);
+    g_signal_connect(vid_sink, "new-sample", G_CALLBACK(&Headunit::newVideoSample), this);
 
-    gst_object_unref(glsinkbin);
-    gst_object_unref(vid_sink);
+//    GST_DEBUG_BIN_TO_DOT_FILE_WITH_TS(GST_BIN(vid_pipeline),GST_DEBUG_GRAPH_SHOW_VERBOSE, "vid_pipeline");
 
     if (error != NULL) {
         qDebug("Could not construct video pipeline: %s", error->message);
@@ -195,7 +184,65 @@ int Headunit::init(){
 
     gst_element_set_state(mic_pipeline, GST_STATE_READY);
 
+
+    m_vid_src = GST_APP_SRC(gst_bin_get_by_name(GST_BIN(vid_pipeline), "vid_src"));
+    m_aud_src = GST_APP_SRC(gst_bin_get_by_name(GST_BIN(aud_pipeline), "audsrc"));
+    m_au1_src = GST_APP_SRC(gst_bin_get_by_name(GST_BIN(au1_pipeline), "au1src"));
+
     return 0;
+}
+
+
+GstFlowReturn Headunit::newVideoSample (GstElement * appsink, Headunit * _this){
+
+    GstSample *gstsample = gst_app_sink_pull_sample(GST_APP_SINK(appsink));
+    if (!gstsample) {
+        return GST_FLOW_ERROR;
+    }
+
+    GstBuffer *gstbuf = gst_sample_get_buffer(gstsample);
+    if(!gstbuf){
+        gst_sample_unref(gstsample);
+        return GST_FLOW_ERROR;
+    }
+
+    GstMapInfo mapInfo;
+    gst_buffer_map(gstbuf, &mapInfo, GST_MAP_READ);
+
+    GstCaps* caps = gst_sample_get_caps (gstsample);
+    GstVideoInfo info;
+    gst_video_info_from_caps (&info, caps);
+
+    QGstVideoBuffer *qgstBuf = new QGstVideoBuffer(gstbuf,info);
+    QVideoFrame frame(static_cast<QAbstractVideoBuffer *>(qgstBuf), QSize(info.width,info.height),QVideoFrame::Format_YUV420P);
+
+    emit _this->receivedVideoFrame(frame);
+
+    gst_buffer_unmap(gstbuf, const_cast<GstMapInfo*> (&mapInfo));
+    gst_sample_unref (gstsample);
+    return GST_FLOW_OK;
+}
+
+void Headunit::setVideoSurface(QAbstractVideoSurface *surface)
+{
+    qDebug() << "Setting video surface";
+    if (m_surface != surface && m_surface && m_surface->isActive()) {
+        m_surface->stop();
+    }
+    m_surface = surface;
+//    if (m_surface)
+//        m_surface->start(m_format);
+}
+void Headunit::videoFrameHandler(const QVideoFrame &frame)
+{
+    if (m_surface != nullptr) {
+        if(!m_videoStarted){
+            m_videoStarted = true;
+            QVideoSurfaceFormat format(frame.size(), QVideoFrame::Format_YUV420P);
+            m_surface->start(format);
+        }
+        m_surface->present(frame);
+    }
 }
 
 GstFlowReturn Headunit::read_mic_data(GstElement *appsink, Headunit *_this) {
@@ -380,11 +427,11 @@ int DesktopEventCallbacks::MediaPacket(int chan, uint64_t timestamp, const byte 
     GstAppSrc* gst_src = nullptr;
 
     if (chan == AA_CH_VID) {
-        gst_src = GST_APP_SRC(gst_bin_get_by_name(GST_BIN(headunit->vid_pipeline), "vid_src"));
+        gst_src = headunit->m_vid_src;
     } else if (chan == AA_CH_AUD) {
-        gst_src = GST_APP_SRC(gst_bin_get_by_name(GST_BIN(headunit->aud_pipeline), "audsrc"));
+        gst_src = headunit->m_aud_src;
     } else if (chan == AA_CH_AU1) {
-        gst_src = GST_APP_SRC(gst_bin_get_by_name(GST_BIN(headunit->au1_pipeline), "au1src"));
+        gst_src = headunit->m_au1_src;
     }
 
     if (gst_src) {
@@ -398,7 +445,6 @@ int DesktopEventCallbacks::MediaPacket(int chan, uint64_t timestamp, const byte 
         if (ret != GST_FLOW_OK) {
             qDebug("push buffer returned %d for %d bytes ", ret, len);
         }
-        gst_object_unref(gst_src);
     }
     return 0;
 }
@@ -408,6 +454,8 @@ int DesktopEventCallbacks::MediaStart(int chan) {
     case AA_CH_VID:
         gst_element_set_state(headunit->vid_pipeline, GST_STATE_PLAYING);
         headunit->setStatus(Headunit::RUNNING);
+
+        GST_DEBUG_BIN_TO_DOT_FILE_WITH_TS(GST_BIN(headunit->vid_pipeline),GST_DEBUG_GRAPH_SHOW_VERBOSE, "vid_pipeline");
         break;
     case AA_CH_AUD:
         gst_element_set_state(headunit->aud_pipeline, GST_STATE_PLAYING);
